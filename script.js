@@ -3,6 +3,24 @@
  * Premium Coffee Machine Cleaning Tablet
  */
 
+// ============================================
+// Product Gallery Image Change
+// ============================================
+function changeImage(imageSrc) {
+    const mainImage = document.getElementById('mainImage');
+    if (mainImage) {
+        mainImage.src = imageSrc;
+        
+        // Update active thumbnail
+        document.querySelectorAll('.thumb').forEach(thumb => {
+            thumb.classList.remove('active');
+            if (thumb.querySelector('img').src.includes(imageSrc)) {
+                thumb.classList.add('active');
+            }
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // ============================================
     // Mobile Menu Toggle
