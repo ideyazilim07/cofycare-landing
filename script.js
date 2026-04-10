@@ -165,7 +165,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             if (targetElement) {
                 const headerHeight = header ? header.offsetHeight : 0;
-                const targetPosition = targetElement.offsetTop - headerHeight - 20;
+                // Special handling for kullanim section to show video fully
+                const extraOffset = targetId === '#kullanim' ? 80 : 20;
+                const targetPosition = targetElement.offsetTop - headerHeight - extraOffset;
                 
                 window.scrollTo({
                     top: targetPosition,
