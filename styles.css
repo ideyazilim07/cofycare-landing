@@ -202,14 +202,17 @@ input, textarea {
     display: flex;
     align-items: center;
     gap: var(--space-sm);
+    background-color: transparent !important;
 }
 
 .logo-img {
     height: 90px;
     width: auto;
     object-fit: contain;
-    background: transparent !important;
+    background-color: transparent !important;
     mix-blend-mode: multiply;
+    filter: brightness(1.02);
+    isolation: isolate;
 }
 
 .logo-img-footer {
