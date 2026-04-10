@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Onayı - CofyCare</title>
+    <meta name="description" content="Siparişiniz başarıyla alındı. CofyCare ekibi en kısa sürede size ulaşacak.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .success-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f5f9fc 0%, #ffffff 100%);
+            padding: 40px 20px;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #00c853 0%, #00a853 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 32px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-icon i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .success-card h1 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            margin-bottom: 16px;
+            color: var(--color-text-primary);
+        }
+
+        .success-card > p {
+            color: var(--color-text-secondary);
+            margin-bottom: 32px;
+            font-size: 1.0625rem;
+        }
+
+        .order-details {
+            background: var(--color-cream);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 32px;
+            text-align: left;
+        }
+
+        .order-details h3 {
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .order-info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 0.9375rem;
+        }
+
+        .order-info-row.total {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--color-primary);
+            border-top: 2px solid var(--color-border);
+            margin-top: 8px;
+            padding-top: 16px;
+        }
+
+        .order-id {
+            background: var(--color-primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1.125rem;
+            display: inline-block;
+            margin-bottom: 24px;
+        }
+
+        .next-steps {
+            text-align: left;
+            margin-bottom: 32px;
+        }
+
+        .next-steps h3 {
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+        }
+
+        .next-steps ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .next-steps li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 8px 0;
+            color: var(--color-text-secondary);
+        }
+
+        .next-steps li i {
+            color: var(--color-accent);
+            margin-top: 4px;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .whatsapp-support {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25d366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+
+        .whatsapp-support:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 480px) {
+            .success-card {
+                padding: 32px 24px;
+            }
+
+            .success-card h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="success-page">
+        <div class="success-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+
+            <h1>Siparişiniz Alındı! 🎉</h1>
+            <p>CoffyTab siparişiniz başarıyla oluşturuldu. En kısa sürede kargoya verilecektir.</p>
+
+            <div class="order-id" id="order-id">-</div>
+
+            <div class="order-details" id="order-details">
+                <!-- Order details will be rendered here -->
+            </div>
+
+            <div class="next-steps">
+                <h3>Sonraki Adımlar</h3>
+                <ul>
+                    <li>
+                        <i class="fas fa-envelope"></i>
+                        <span>Sipariş onay e-postası gönderildi. Lütfen gelen kutunuzu kontrol edin.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-phone"></i>
+                        <span>Siparişiniz onaylandıktan sonra sizi arayacağız.</span>
+                    </li>
+                    <li>
+                        <i class="fas fa-truck"></i>
+                        <span>Kargo takip numaranız SMS ile gönderilecektir.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="success-actions">
+                <a href="/" class="btn btn-primary">
+                    <i class="fas fa-home"></i> Ana Sayfaya Dön
+                </a>
+                
+                <a href="https://wa.me/905XXXXXXXXX" class="whatsapp-support" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp Destek
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load order details from localStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const orderData = JSON.parse(localStorage.getItem('cofycare_current_order'));
+            
+            if (!orderData) {
+                window.location.href = '/';
+                return;
+            }
+
+            // Display order ID
+            document.getElementById('order-id').textContent = orderData.orderId;
+
+            // Render order details
+            const detailsContainer = document.getElementById('order-details');
+            detailsContainer.innerHTML = `
+                <h3>Sipariş Özeti</h3>
+                ${orderData.items.map(item => `
+                    <div class="order-info-row">
+                        <span>${item.name} x${item.quantity}</span>
+                        <span>₺${(item.price * item.quantity).toLocaleString('tr-TR')}</span>
+                    </div>
+                `).join('')}
+                <div class="order-info-row">
+                    <span>Kargo</span>
+                    <span>${orderData.totals.shipping === 0 ? 'Ücretsiz' : '₺' + orderData.totals.shipping.toLocaleString('tr-TR')}</span>
+                </div>
+                <div class="order-info-row total">
+                    <span>Toplam</span>
+                    <span>₺${orderData.totals.total.toLocaleString('tr-TR')}</span>
+                </div>
+            `;
+
+            // Clear cart after successful order
+            localStorage.removeItem('cofycare_cart');
+        });
+    </script>
+</body>
+</html>

@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="styles-ecommerce.css">
 </head>
 <body>
     <!-- Üst Bildirim Bandı -->
@@ -59,11 +58,6 @@
                 </div>
                 
                 <a href="#siparis" class="btn btn-primary nav-cta">Sipariş Ver</a>
-                
-                <button class="cart-icon-btn" onclick="cart.openCartDrawer()" aria-label="Sepet">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span class="cart-count">0</span>
-                </button>
                 
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Menü">
                     <span></span>
@@ -489,111 +483,106 @@
         </div>
     </section>
 
-    <!-- Paket Seçimi Section -->
-    <section class="packages-section" id="paketler">
+    <!-- Ürün Detayı Section -->
+    <section class="product-detail" id="urun-detayi">
         <div class="container">
-            <div class="section-header">
-                <span class="section-tag">Kampanya</span>
-                <h2 class="section-title">Size En Uygun Paketi Seçin</h2>
-                <p class="section-subtitle">
-                    Daha fazla al, daha fazla kazan! İndirimli paketlerle kahve makinenizi uzun süre temiz tutun.
-                </p>
-            </div>
-            
-            <!-- Kampanya Sayacı -->
-            <div class="campaign-banner" style="margin-bottom: 40px; border-radius: 12px;">
-                <div class="container">
-                    <div class="campaign-content">
-                        <div class="campaign-text">
-                            <i class="fas fa-fire"></i> Bugüne Özel Fırsat! <span>%40'a Varan İndirim</span>
+            <div class="product-detail-grid">
+                <div class="product-gallery">
+                    <div class="gallery-main">
+                        <img src="product-1.png" alt="CoffyTab Kahve Makinesi Temizleme Tableti - Ana Görsel" class="product-img-gallery" id="mainImage">
+                    </div>
+                    <div class="gallery-thumbs">
+                        <div class="thumb active" onclick="changeImage('product-1.png')">
+                            <img src="product-1.png" alt="Ürün Görsel 1">
                         </div>
-                        <div class="countdown-timer">
-                            <!-- Timer will be rendered by JS -->
+                        <div class="thumb" onclick="changeImage('product-2.png')">
+                            <img src="product-2.png" alt="Ürün Görsel 2">
+                        </div>
+                        <div class="thumb" onclick="changeImage('product-3.png')">
+                            <img src="product-3.png" alt="Ürün Görsel 3">
+                        </div>
+                        <div class="thumb" onclick="changeImage('product-4.png')">
+                            <img src="product-4.png" alt="Ürün Görsel 4">
+                        </div>
+                        <div class="thumb" onclick="changeImage('product-5.png')">
+                            <img src="product-5.png" alt="Ürün Görsel 5">
                         </div>
                     </div>
-                </div>
-            </div>
-            
-            <div class="packages-grid">
-                <!-- 1 Adet -->
-                <div class="package-card">
-                    <div class="package-quantity">1 <span>Adet</span></div>
-                    <h3 class="package-name">Başlangıç Paketi</h3>
-                    <div class="package-price">
-                        <span class="current">₺690</span>
-                    </div>
-                    <div class="package-savings">Standart Fiyat</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> 100 Tablet (1 gr)</li>
-                        <li><i class="fas fa-check"></i> Günlük Kullanım</li>
-                        <li><i class="fas fa-check"></i> 1 Aylık Temizlik</li>
-                        <li><i class="fas fa-check"></i> Ücretsiz Kargo</li>
-                    </ul>
-                    <button class="btn btn-secondary package-btn" onclick="addPackageToCart(1)">
-                        Sepete Ekle <i class="fas fa-shopping-bag"></i>
-                    </button>
                 </div>
                 
-                <!-- 2 Adet - Popüler -->
-                <div class="package-card featured">
-                    <div class="package-badge popular">En Çok Tercih Edilen</div>
-                    <div class="package-quantity">2 <span>Adet</span></div>
-                    <h3 class="package-name">Popüler Paket</h3>
-                    <div class="package-price">
-                        <span class="current">₺1.200</span>
-                        <span class="original">₺1.380</span>
+                <div class="product-info">
+                    <span class="product-tag">CoffyTab Tablet</span>
+                    <h2 class="product-title">Kahve Makinesi Temizleme Tableti</h2>
+                    
+                    <div class="product-rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span class="rating-text">4.9/5 (128 Değerlendirme)</span>
                     </div>
-                    <div class="package-savings">₺180 Tasarruf</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> 200 Tablet (1 gr)</li>
-                        <li><i class="fas fa-check"></i> Günlük Kullanım</li>
-                        <li><i class="fas fa-check"></i> 2 Aylık Temizlik</li>
-                        <li><i class="fas fa-check"></i> Ücretsiz Kargo</li>
-                    </ul>
-                    <button class="btn btn-primary package-btn" onclick="addPackageToCart(2)">
-                        Sepete Ekle <i class="fas fa-shopping-bag"></i>
-                    </button>
-                </div>
-                
-                <!-- 3 Adet - En İyi Değer -->
-                <div class="package-card featured">
-                    <div class="package-badge best">En İyi Değer</div>
-                    <div class="package-quantity">3 <span>Adet</span></div>
-                    <h3 class="package-name">Aile Paketi</h3>
-                    <div class="package-price">
-                        <span class="current">₺1.650</span>
-                        <span class="original">₺2.070</span>
+                    
+                    <div class="product-price" id="siparis">
+                        <div class="price-main">
+                            <span class="currency">₺</span>
+                            <span class="amount">690</span>
+                            <span class="cents">,00</span>
+                        </div>
+                        <div class="price-note">Kargo dahil</div>
                     </div>
-                    <div class="package-savings">₺420 Tasarruf</div>
-                    <ul class="package-features">
-                        <li><i class="fas fa-check"></i> 300 Tablet (1 gr)</li>
-                        <li><i class="fas fa-check"></i> Günlük Kullanım</li>
-                        <li><i class="fas fa-check"></i> 3 Aylık Temizlik</li>
-                        <li><i class="fas fa-check"></i> Ücretsiz Kargo</li>
-                    </ul>
-                    <button class="btn btn-primary package-btn" onclick="addPackageToCart(3)">
-                        Sepete Ekle <i class="fas fa-shopping-bag"></i>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Güven Rozetleri -->
-            <div class="trust-badges" style="margin-top: 60px; text-align: center;">
-                <div class="trust-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>256-bit SSL Güvenlik</span>
-                </div>
-                <div class="trust-item">
-                    <i class="fas fa-truck"></i>
-                    <span>Ücretsiz Kargo</span>
-                </div>
-                <div class="trust-item">
-                    <i class="fas fa-undo"></i>
-                    <span>14 Gün İade Garantisi</span>
-                </div>
-                <div class="trust-item">
-                    <i class="fas fa-headset"></i>
-                    <span>7/24 Destek</span>
+                    
+                    <div class="product-specs">
+                        <div class="spec-item">
+                            <span class="spec-label">Ürün Tipi:</span>
+                            <span class="spec-value">Temizleme Tableti</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Kutu İçeriği:</span>
+                            <span class="spec-value">100 Tablet (1 gr each)</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Kullanım Amacı:</span>
+                            <span class="spec-value">Kahve Makinesi Bakımı</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Uyumlu Kullanım:</span>
+                            <span class="spec-value">Ev ve Ofis Tipi Makineler</span>
+                        </div>
+                        <div class="spec-item">
+                            <span class="spec-label">Saklama:</span>
+                            <span class="spec-value">Serin ve Kuru Yer</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-actions">
+                        <div class="quantity-selector">
+                            <button class="qty-btn" id="qtyMinus"><i class="fas fa-minus"></i></button>
+                            <input type="number" value="1" min="1" max="10" id="qtyInput" readonly>
+                            <button class="qty-btn" id="qtyPlus"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <button class="btn btn-primary btn-large btn-full" id="addToCart">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Sepete Ekle</span>
+                        </button>
+                    </div>
+                    
+                    <div class="product-trust-badges">
+                        <div class="badge-item">
+                            <i class="fas fa-truck"></i>
+                            <span>Hızlı Kargo</span>
+                        </div>
+                        <div class="badge-item">
+                            <i class="fas fa-undo"></i>
+                            <span>Kolay İade</span>
+                        </div>
+                        <div class="badge-item">
+                            <i class="fas fa-headset"></i>
+                            <span>7/24 Destek</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -984,8 +973,6 @@
         <span>Ürün sepete eklendi!</span>
     </div>
 
-    <script src="js/cart.js"></script>
-    <script src="js/countdown.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
