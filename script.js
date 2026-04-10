@@ -396,14 +396,21 @@ let selectedMobilePackage = 2; // Default to popular package
 function selectMobilePackage(packageType) {
     selectedMobilePackage = packageType;
     
-    // Update UI
+    // Update UI - hem data-package attribute'üne hem de ID'ye göre
     document.querySelectorAll('.mobile-package-card').forEach(card => {
         card.classList.remove('selected');
     });
     
-    const selectedCard = document.querySelector(`.mobile-package-card[data-package="${packageType}"]`);
-    if (selectedCard) {
-        selectedCard.classList.add('selected');
+    // data-package attribute'üne göre seç
+    const selectedCardByData = document.querySelector(`.mobile-package-card[data-package="${packageType}"]`);
+    if (selectedCardByData) {
+        selectedCardByData.classList.add('selected');
+    }
+    
+    // ID'ye göre seç (top-pkg-* formatı)
+    const selectedCardById = document.getElementById(`top-pkg-${packageType}`);
+    if (selectedCardById) {
+        selectedCardById.classList.add('selected');
     }
 }
 

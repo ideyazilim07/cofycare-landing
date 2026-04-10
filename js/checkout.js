@@ -41,17 +41,17 @@ class Checkout {
           <p>Adet: ${item.quantity}</p>
         </div>
         <div class="checkout-item-price">
-          <span>₺${(item.price * item.quantity).toLocaleString('tr-TR')}</span>
+          <span>₺${(item.price * item.quantity).toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
         </div>
       </div>
     `).join('');
 
     // Update totals
     const totals = cartData.totals;
-    if (subtotalEl) subtotalEl.textContent = `₺${totals.subtotal.toLocaleString('tr-TR')}`;
-    if (shippingEl) shippingEl.textContent = totals.shipping === 0 ? 'Ücretsiz' : `₺${totals.shipping.toLocaleString('tr-TR')}`;
-    if (totalEl) totalEl.textContent = `₺${totals.total.toLocaleString('tr-TR')}`;
-    if (checkoutTotalEl) checkoutTotalEl.textContent = totals.total.toLocaleString('tr-TR');
+    if (subtotalEl) subtotalEl.textContent = `₺${totals.subtotal.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    if (shippingEl) shippingEl.textContent = totals.shipping === 0 ? 'Ücretsiz' : `₺${totals.shipping.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    if (totalEl) totalEl.textContent = `₺${totals.total.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+    if (checkoutTotalEl) checkoutTotalEl.textContent = totals.total.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
   }
 
   // Setup form validation
@@ -167,20 +167,13 @@ class Checkout {
     }
   }
 
-  // Load districts (simplified - in production, this would be a complete list)
+  // Load districts (from districts.js)
   loadDistricts(city) {
-    const districts = {
-      'İstanbul': ['Adalar', 'Arnavutköy', 'Ataşehir', 'Avcılar', 'Bağcılar', 'Bahçelievler', 'Bakırköy', 'Başakşehir', 'Bayrampaşa', 'Beşiktaş', 'Beykoz', 'Beylikdüzü', 'Beyoğlu', 'Büyükçekmece', 'Çatalca', 'Çekmeköy', 'Esenler', 'Esenyurt', 'Eyüpsultan', 'Fatih', 'Gaziosmanpaşa', 'Güngören', 'Kadıköy', 'Kağıthane', 'Kartal', 'Küçükçekmece', 'Maltepe', 'Pendik', 'Sancaktepe', 'Sarıyer', 'Silivri', 'Sultanbeyli', 'Sultangazi', 'Şile', 'Şişli', 'Tuzla', 'Ümraniye', 'Üsküdar', 'Zeytinburnu'],
-      'Ankara': ['Akyurt', 'Altındağ', 'Ayaş', 'Bala', 'Beypazarı', 'Çamlıdere', 'Çankaya', 'Çubuk', 'Elmadağ', 'Etimesgut', 'Evren', 'Gölbaşı', 'Güdül', 'Haymana', 'Kahramankazan', 'Kalecik', 'Keçiören', 'Kızılcahamam', 'Mamak', 'Nallıhan', 'Polatlı', 'Pursaklar', 'Sincan', 'Şereflikoçhisar', 'Yenimahalle'],
-      'İzmir': ['Aliağa', 'Balçova', 'Bayındır', 'Bayraklı', 'Bergama', 'Beydağ', 'Bornova', 'Buca', 'Çeşme', 'Çiğli', 'Dikili', 'Foça', 'Gaziemir', 'Güzelbahçe', 'Karabağlar', 'Karaburun', 'Karşıyaka', 'Kemalpaşa', 'Kınık', 'Kiraz', 'Konak', 'Menderes', 'Menemen', 'Narlıdere', 'Ödemiş', 'Seferihisar', 'Selçuk', 'Tire', 'Torbalı', 'Urla']
-    };
-
     const districtSelect = document.querySelector('select[name="district"]');
-    if (districtSelect) {
-      const cityDistricts = districts[city] || ['Merkez'];
+    if (districtSelect && typeof districtsData !== 'undefined') {
+      const cityDistricts = districtsData[city] || ['Merkez'];
       districtSelect.innerHTML = '<option value="">İlçe Seçin</option>' +
-        cityDistricts.map(district => `<option value="${district}">${district}</option>
-        `).join('');
+        cityDistricts.map(district => `<option value="${district}">${district}</option>`).join('');
     }
   }
 

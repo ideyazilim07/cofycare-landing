@@ -339,6 +339,37 @@
                     </div>
 
                     <form id="checkout-form">
+                        <!-- Müşteri Tipi Seçimi -->
+                        <div class="form-group customer-type">
+                            <label>Müşteri Tipi *</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="customer_type" value="individual" checked onchange="toggleCompanyFields()">
+                                    <span>Bireysel</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="customer_type" value="company" onchange="toggleCompanyFields()">
+                                    <span>Şirket</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Şirket Bilgileri (Gizli Başlangıçta) -->
+                        <div id="company-fields" style="display: none;">
+                            <div class="form-group">
+                                <label for="company_name">Şirket Adı *</label>
+                                <input type="text" id="company_name" name="company_name" placeholder="Şirket Adı">
+                            </div>
+                            <div class="form-group">
+                                <label for="tax_number">Vergi Numarası *</label>
+                                <input type="text" id="tax_number" name="tax_number" placeholder="Vergi No" maxlength="11">
+                            </div>
+                            <div class="form-group">
+                                <label for="tax_office">Vergi Dairesi *</label>
+                                <input type="text" id="tax_office" name="tax_office" placeholder="Vergi Dairesi">
+                            </div>
+                        </div>
+
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="name">Ad *</label>
@@ -392,7 +423,24 @@
     </div>
 
     <!-- Scripts -->
+    <script src="js/districts.js"></script>
     <script src="js/cart.js"></script>
     <script src="js/checkout.js"></script>
+    <script>
+        // Toggle company fields visibility
+        function toggleCompanyFields() {
+            const companyFields = document.getElementById('company-fields');
+            const companyInputs = companyFields.querySelectorAll('input');
+            const customerType = document.querySelector('input[name="customer_type"]:checked').value;
+            
+            if (customerType === 'company') {
+                companyFields.style.display = 'block';
+                companyInputs.forEach(input => input.setAttribute('required', 'required'));
+            } else {
+                companyFields.style.display = 'none';
+                companyInputs.forEach(input => input.removeAttribute('required'));
+            }
+        }
+    </script>
 </body>
 </html>

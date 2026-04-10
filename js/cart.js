@@ -151,7 +151,7 @@ class Cart {
     // Update sticky CTA price
     const stickyPrice = document.getElementById('sticky-cart-total');
     if (stickyPrice) {
-      stickyPrice.textContent = `₺${totals.total.toLocaleString('tr-TR')}`;
+      stickyPrice.textContent = `₺${totals.total.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
     }
 
     if (this.items.length === 0) {
@@ -177,8 +177,8 @@ class Cart {
         <div class="cart-item-details">
           <h4>${item.name}</h4>
           <div class="cart-item-price">
-            <span class="price">₺${item.price.toLocaleString('tr-TR')}</span>
-            ${item.savings > 0 ? `<span class="original-price">₺${item.originalPrice.toLocaleString('tr-TR')}</span>` : ''}
+            <span class="price">₺${item.price.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
+            ${item.savings > 0 ? `<span class="original-price">₺${item.originalPrice.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>` : ''}
           </div>
           <div class="cart-item-quantity">
             <button onclick="cart.updateQuantity('${item.id}', ${item.quantity - 1})" class="qty-btn">-</button>
@@ -197,21 +197,21 @@ class Cart {
       <div class="cart-totals">
         <div class="cart-total-row">
           <span>Ara Toplam</span>
-          <span>₺${totals.subtotal.toLocaleString('tr-TR')}</span>
+          <span>₺${totals.subtotal.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
         </div>
         ${totals.totalSavings > 0 ? `
         <div class="cart-total-row savings">
           <span>Tasarruf</span>
-          <span>-₺${totals.totalSavings.toLocaleString('tr-TR')}</span>
+          <span>-₺${totals.totalSavings.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
         </div>
         ` : ''}
         <div class="cart-total-row">
           <span>Kargo</span>
-          <span>${totals.shipping === 0 ? 'Ücretsiz' : '₺' + totals.shipping.toLocaleString('tr-TR')}</span>
+          <span>${totals.shipping === 0 ? 'Ücretsiz' : '₺' + totals.shipping.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
         </div>
         <div class="cart-total-row total">
           <span>Toplam</span>
-          <span>₺${totals.total.toLocaleString('tr-TR')}</span>
+          <span>₺${totals.total.toLocaleString('tr-TR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>
         </div>
       </div>
       <a href="checkout.html" class="btn btn-primary btn-large btn-full" onclick="cart.closeCartDrawer()">
