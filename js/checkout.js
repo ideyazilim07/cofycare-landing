@@ -130,14 +130,14 @@ class Checkout {
       }
     }
 
-    // Phone validation
+    // Phone validation - 10 veya 11 hane kabul et
     const phoneField = form.querySelector('input[name="phone"]');
     if (phoneField && phoneField.value) {
       const phoneDigits = phoneField.value.replace(/\D/g, '');
-      if (phoneDigits.length !== 11) {
+      if (phoneDigits.length !== 10 && phoneDigits.length !== 11) {
         isValid = false;
         phoneField.classList.add('error');
-        alert('Telefon numarası 11 haneli olmalıdır (5XX XXX XX XX)');
+        alert('Telefon numarası 10 veya 11 haneli olmalıdır (örn: 533 218 30 33 veya 0533 218 30 33)');
       }
     }
 
@@ -182,12 +182,18 @@ class Checkout {
     const form = document.getElementById('checkout-form');
     const formData = new FormData(form);
     
+    // Telefon numarasını düzenle - 10 haneliyse başına 0 ekle
+    let phoneDigits = formData.get('phone').replace(/\D/g, '');
+    if (phoneDigits.length === 10) {
+      phoneDigits = '0' + phoneDigits;
+    }
+    
     const orderData = {
       orderId: this.generateOrderId(),
       name: formData.get('name'),
       surname: formData.get('surname'),
       email: formData.get('email'),
-      phone: formData.get('phone').replace(/\D/g, ''),
+      phone: phoneDigits,
       address: formData.get('address'),
       city: formData.get('city'),
       district: formData.get('district'),
