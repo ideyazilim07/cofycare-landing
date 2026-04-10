@@ -27,8 +27,8 @@ class Cart {
   addItem(packageType, quantity = 1) {
     const packages = {
       1: { id: 'pkg-1', name: '1 Adet CoffyTab', price: 690, originalPrice: 690, savings: 0 },
-      2: { id: 'pkg-2', name: '2 Adet CoffyTab', price: 1200, originalPrice: 1380, savings: 180 },
-      3: { id: 'pkg-3', name: '3 Adet CoffyTab', price: 1650, originalPrice: 2070, savings: 420 }
+      2: { id: 'pkg-2', name: '2 Adet CoffyTab', price: 1190, originalPrice: 1380, savings: 190 },
+      3: { id: 'pkg-3', name: '3 Adet CoffyTab', price: 1690, originalPrice: 2070, savings: 380 }
     };
 
     const pkg = packages[packageType];
