@@ -389,6 +389,56 @@ function isInViewport(element) {
 }
 
 // ============================================
+// Mobile Package Selection
+// ============================================
+let selectedMobilePackage = 2; // Default to popular package
+
+function selectMobilePackage(packageType) {
+    selectedMobilePackage = packageType;
+    
+    // Update UI
+    document.querySelectorAll('.mobile-package-card').forEach(card => {
+        card.classList.remove('selected');
+    });
+    
+    const selectedCard = document.querySelector(`.mobile-package-card[data-package="${packageType}"]`);
+    if (selectedCard) {
+        selectedCard.classList.add('selected');
+    }
+}
+
+function addSelectedMobilePackage() {
+    if (typeof cart !== 'undefined') {
+        cart.addItem(selectedMobilePackage, 1);
+    }
+}
+
+// Mobile countdown timer
+function updateMobileCountdown() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    
+    const diff = endOfDay - now;
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    const hoursEl = document.getElementById('mobile-hours');
+    const minutesEl = document.getElementById('mobile-minutes');
+    const secondsEl = document.getElementById('mobile-seconds');
+    
+    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+}
+
+// Start mobile countdown
+setInterval(updateMobileCountdown, 1000);
+updateMobileCountdown();
+
+// ============================================
 // Export for module usage (if needed)
 // ============================================
 if (typeof module !== 'undefined' && module.exports) {

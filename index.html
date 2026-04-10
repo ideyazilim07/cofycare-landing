@@ -27,6 +27,7 @@
     
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="styles-ecommerce.css">
+    <link rel="stylesheet" href="styles-mobile.css">
 </head>
 <body>
     <!-- Üst Bildirim Bandı -->
@@ -149,6 +150,49 @@
                 <span>Keşfet</span>
                 <i class="fas fa-chevron-down"></i>
             </a>
+        </div>
+    </section>
+
+    <!-- Mobile Product Showcase -->
+    <section class="mobile-only" style="background: white; padding-bottom: 20px;">
+        <!-- Product Image -->
+        <div class="mobile-product-image">
+            <img src="product-1.png" alt="CoffyTab Kahve Makinesi Temizleme Tableti">
+            <div class="image-dots">
+                <span class="image-dot active"></span>
+                <span class="image-dot"></span>
+                <span class="image-dot"></span>
+            </div>
+        </div>
+        
+        <!-- Product Info -->
+        <div class="mobile-product-info">
+            <h1 class="mobile-product-title">CoffyTab® Kahve Makinesi Temizleme Tableti</h1>
+            
+            <div class="mobile-rating">
+                <span class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </span>
+                <span>4.9 (128 Yorum)</span>
+            </div>
+            
+            <div class="mobile-secure-badge">
+                <i class="fas fa-shield-alt"></i>
+                <span>Güvenli Ödeme!</span>
+            </div>
+            
+            <div style="display: flex; gap: 12px; margin-bottom: 16px;">
+                <span style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--color-text-secondary);">
+                    <i class="fas fa-truck" style="color: var(--color-accent);"></i> Kapıda Ödeme
+                </span>
+                <span style="display: flex; align-items: center; gap: 6px; font-size: 0.875rem; color: var(--color-text-secondary);">
+                    <i class="fas fa-leaf" style="color: var(--color-accent);"></i> %100 Organik
+                </span>
+            </div>
         </div>
     </section>
 
@@ -588,6 +632,147 @@
                     <i class="fas fa-truck"></i>
                     <span>Ücretsiz Kargo</span>
                 </div>
+                <div class="trust-item">
+                    <i class="fas fa-undo"></i>
+                    <span>14 Gün İade Garantisi</span>
+                </div>
+                <div class="trust-item">
+                    <i class="fas fa-headset"></i>
+                    <span>7/24 Destek</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Campaign Timer (Dark Style) -->
+    <section class="mobile-only" style="padding: 0 16px 20px;">
+        <div class="mobile-campaign">
+            <div class="mobile-campaign-title">🎉 İndirimli Paketler!</div>
+            <div class="mobile-campaign-subtitle">Fırsatı Kaçırma, Son Gün!</div>
+            <div class="mobile-countdown">
+                <div class="mobile-countdown-item">
+                    <span class="number" id="mobile-hours">05</span>
+                    <span class="label">Saat</span>
+                </div>
+                <div class="mobile-countdown-item">
+                    <span class="number" id="mobile-minutes">42</span>
+                    <span class="label">Dakika</span>
+                </div>
+                <div class="mobile-countdown-item">
+                    <span class="number" id="mobile-seconds">18</span>
+                    <span class="label">Saniye</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Package Selection (Radio Style) -->
+    <section class="mobile-only mobile-packages" id="mobile-paketler">
+        <div style="padding: 0 16px; margin-bottom: 12px;">
+            <h3 style="font-size: 1.125rem; margin-bottom: 4px;">Paketini Seç</h3>
+            <p style="font-size: 0.875rem; color: var(--color-text-muted);">Daha fazla al, daha fazla kazan</p>
+        </div>
+        
+        <!-- 1 Adet -->
+        <div class="mobile-package-card" onclick="selectMobilePackage(1)" data-package="1">
+            <div class="mobile-package-radio">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="mobile-package-info">
+                <div class="mobile-package-name">1 Adet CoffyTab</div>
+                <div class="mobile-package-detail">100 Tablet • 1 Aylık Kullanım</div>
+            </div>
+            <div class="mobile-package-price">
+                <span class="current">₺690</span>
+            </div>
+        </div>
+        
+        <!-- 2 Adet - Popular -->
+        <div class="mobile-package-card selected" onclick="selectMobilePackage(2)" data-package="2">
+            <div class="mobile-package-radio">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="mobile-package-info">
+                <div class="mobile-package-name">2 Adet CoffyTab <span class="mobile-package-badge">POPÜLER</span></div>
+                <div class="mobile-package-detail">200 Tablet • 2 Aylık Kullanım</div>
+            </div>
+            <div class="mobile-package-price">
+                <span class="current">₺1.190</span>
+                <span class="original">₺1.380</span>
+            </div>
+        </div>
+        
+        <!-- 3 Adet - Best Value -->
+        <div class="mobile-package-card" onclick="selectMobilePackage(3)" data-package="3">
+            <div class="mobile-package-radio">
+                <i class="fas fa-check"></i>
+            </div>
+            <div class="mobile-package-info">
+                <div class="mobile-package-name">3 Adet CoffyTab <span class="mobile-package-badge" style="background: var(--color-primary);">EN İYİ</span></div>
+                <div class="mobile-package-detail">300 Tablet • 3 Aylık Kullanım</div>
+            </div>
+            <div class="mobile-package-price">
+                <span class="current">₺1.690</span>
+                <span class="original">₺2.070</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Add to Cart Button -->
+    <div class="mobile-only mobile-add-to-cart">
+        <button class="btn btn-primary" onclick="addSelectedMobilePackage()">
+            <i class="fas fa-shopping-bag"></i> Sepete Ekle
+        </button>
+    </div>
+
+    <!-- Mobile Feature Cards -->
+    <section class="mobile-only mobile-features">
+        <div class="mobile-feature-card">
+            <h3><i class="fas fa-leaf"></i> %100 Organik</h3>
+            <p>CoffyTab tabletleri tamamen doğal içeriklerle üretilmiştir. Kimyasal madde içermez. Hem sağlığınız hem de çevre için güvenlidir.</p>
+        </div>
+        
+        <div class="mobile-feature-card">
+            <h3><i class="fas fa-truck"></i> Aynı Gün Kargo</h3>
+            <p>16:00'a kadar verilen siparişler aynı gün kargoya verilir. İstanbul içi 1-2, diğer iller 2-3 iş gününde teslimat.</p>
+        </div>
+        
+        <div class="mobile-feature-card">
+            <h3><i class="fas fa-shield-alt"></i> Güvenli Ödeme</h3>
+            <p>256-bit SSL şifreleme ile güvenli ödeme. Kapıda ödeme seçeneği mevcut. Bilgileriniz asla paylaşılmaz.</p>
+        </div>
+    </section>
+
+    <!-- Mobile Testimonial Dark -->
+    <section class="mobile-only mobile-testimonial-dark">
+        <h2>Mükemmel Temizlik<br>Kusursuz Kahve Keyfi</h2>
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Müşteri" class="avatar">
+        <blockquote>
+            "Daha önce kullandığım temizlik ürünleri etkili değildi, makinemde yağ birikintileri ve koku vardı. CoffyTab ile tanıştıktan sonra kahvem çok daha lezzetli oldu. Gerçekten kaliteli bir ürün."
+        </blockquote>
+        <div class="author">— Ahmet K.</div>
+        
+        <div class="mobile-trust-grid" style="margin-top: 32px;">
+            <div class="mobile-trust-item">
+                <i class="fas fa-rocket"></i>
+                <span>24 Saatte Kargoda</span>
+            </div>
+            <div class="mobile-trust-item">
+                <i class="fas fa-leaf"></i>
+                <span>%100 Organik</span>
+            </div>
+            <div class="mobile-trust-item">
+                <i class="fas fa-heart"></i>
+                <span>Makine Dostu</span>
+            </div>
+            <div class="mobile-trust-item">
+                <i class="fas fa-bolt"></i>
+                <span>Hızlı Etki</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Müşteri Yorumları Section -->
                 <div class="trust-item">
                     <i class="fas fa-undo"></i>
                     <span>14 Gün İade Garantisi</span>
