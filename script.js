@@ -438,6 +438,31 @@ function updateMobileCountdown() {
 setInterval(updateMobileCountdown, 1000);
 updateMobileCountdown();
 
+// Mobile countdown timer - Top section
+function updateTopCountdown() {
+    const now = new Date();
+    const endOfDay = new Date(now);
+    endOfDay.setHours(23, 59, 59, 999);
+    
+    const diff = endOfDay - now;
+    
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+    
+    const hoursEl = document.getElementById('top-hours');
+    const minutesEl = document.getElementById('top-minutes');
+    const secondsEl = document.getElementById('top-seconds');
+    
+    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+    if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+    if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
+}
+
+// Start top countdown
+setInterval(updateTopCountdown, 1000);
+updateTopCountdown();
+
 // ============================================
 // Export for module usage (if needed)
 // ============================================
