@@ -94,7 +94,7 @@
         </div>
         
         <!-- Paket 1 -->
-        <div class="mobile-package-card" onclick="selectMobilePackage(1); document.getElementById('top-pkg-1').classList.add('selected'); document.getElementById('top-pkg-2').classList.remove('selected'); document.getElementById('top-pkg-3').classList.remove('selected');" id="top-pkg-1" style="display: flex; align-items: center; gap: 12px; background: white; border: 2px solid var(--color-border); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
+        <div class="mobile-package-card" onclick="selectMobilePackage(1)" data-package="1" id="top-pkg-1" style="display: flex; align-items: center; gap: 12px; background: white; border: 2px solid var(--color-border); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
             <div style="width: 24px; height: 24px; border: 2px solid var(--color-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" class="radio-btn">
                 <i class="fas fa-check" style="color: white; font-size: 12px; display: none;"></i>
             </div>
@@ -108,7 +108,7 @@
         </div>
         
         <!-- Paket 2 - Popüler -->
-        <div class="mobile-package-card selected" onclick="selectMobilePackage(2); document.getElementById('top-pkg-1').classList.remove('selected'); document.getElementById('top-pkg-2').classList.add('selected'); document.getElementById('top-pkg-3').classList.remove('selected');" id="top-pkg-2" style="display: flex; align-items: center; gap: 12px; background: white; border: 2px solid var(--color-primary); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer; position: relative;">
+        <div class="mobile-package-card selected" onclick="selectMobilePackage(2)" data-package="2" id="top-pkg-2" style="display: flex; align-items: center; gap: 12px; background: white; border: 2px solid var(--color-primary); border-radius: 12px; padding: 16px; margin-bottom: 12px; cursor: pointer; position: relative;">
             <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: #ff9800; color: white; padding: 2px 12px; border-radius: 12px; font-size: 0.625rem; font-weight: 700;">POPÜLER</div>
             <div style="width: 24px; height: 24px; border: 2px solid var(--color-primary); background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" class="radio-btn">
                 <i class="fas fa-check" style="color: white; font-size: 12px;"></i>
@@ -124,7 +124,7 @@
         </div>
         
         <!-- Paket 3 - En İyi -->
-        <div class="mobile-package-card" onclick="selectMobilePackage(3); document.getElementById('top-pkg-1').classList.remove('selected'); document.getElementById('top-pkg-2').classList.remove('selected'); document.getElementById('top-pkg-3').classList.add('selected');" id="top-pkg-3" style="display: flex; align-items: center; gap: 12px; background: white; border: 2px solid var(--color-border); border-radius: 12px; padding: 16px; margin-bottom: 20px; cursor: pointer; position: relative;">
+        <div class="mobile-package-card" onclick="selectMobilePackage(3)" data-package="3" id="top-pkg-3" style="display: flex; align-items: center; gap: 12px; background: white; border: 2px solid var(--color-border); border-radius: 12px; padding: 16px; margin-bottom: 20px; cursor: pointer; position: relative;">
             <div style="position: absolute; top: -10px; left: 50%; transform: translateX(-50%); background: var(--color-primary); color: white; padding: 2px 12px; border-radius: 12px; font-size: 0.625rem; font-weight: 700;">EN İYİ</div>
             <div style="width: 24px; height: 24px; border: 2px solid var(--color-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;" class="radio-btn">
                 <i class="fas fa-check" style="color: white; font-size: 12px; display: none;"></i>

@@ -396,22 +396,36 @@ let selectedMobilePackage = 2; // Default to popular package
 function selectMobilePackage(packageType) {
     selectedMobilePackage = packageType;
     
-    // Update UI - hem data-package attribute'üne hem de ID'ye göre
+    // Tüm kartlardan selected class'ını kaldır
     document.querySelectorAll('.mobile-package-card').forEach(card => {
         card.classList.remove('selected');
+        card.style.border = '2px solid var(--color-border)';
+        
+        // Radio butonları sıfırla
+        const radioBtn = card.querySelector('.radio-btn');
+        if (radioBtn) {
+            radioBtn.style.border = '2px solid var(--color-border)';
+            radioBtn.style.background = 'transparent';
+            const checkIcon = radioBtn.querySelector('.fa-check');
+            if (checkIcon) checkIcon.style.display = 'none';
+        }
     });
     
-    // data-package attribute'üne göre seç
-    const selectedCardByData = document.querySelector(`.mobile-package-card[data-package="${packageType}"]`);
-    if (selectedCardByData) {
-        selectedCardByData.classList.add('selected');
-    }
-    
-    // ID'ye göre seç (top-pkg-* formatı)
-    const selectedCardById = document.getElementById(`top-pkg-${packageType}`);
-    if (selectedCardById) {
-        selectedCardById.classList.add('selected');
-    }
+    // Seçilen pakete göre hem ID hem data-package ile kartları seç
+    const selectedCards = document.querySelectorAll(`.mobile-package-card[data-package="${packageType}"]`);
+    selectedCards.forEach(card => {
+        card.classList.add('selected');
+        card.style.border = '2px solid var(--color-primary)';
+        
+        // Radio butonu aktif yap
+        const radioBtn = card.querySelector('.radio-btn');
+        if (radioBtn) {
+            radioBtn.style.border = '2px solid var(--color-primary)';
+            radioBtn.style.background = 'var(--color-primary)';
+            const checkIcon = radioBtn.querySelector('.fa-check');
+            if (checkIcon) checkIcon.style.display = 'block';
+        }
+    });
 }
 
 function addSelectedMobilePackage() {
