@@ -12,7 +12,7 @@ class Cart {
 
   // Load cart from localStorage
   loadFromStorage() {
-    const saved = localStorage.getItem('cofycare_cart');
+    const saved = localStorage.getItem('coffytab_cart');
     if (saved) {
       this.items = JSON.parse(saved);
     }
@@ -20,7 +20,7 @@ class Cart {
 
   // Save cart to localStorage
   saveToStorage() {
-    localStorage.setItem('cofycare_cart', JSON.stringify(this.items));
+    localStorage.setItem('coffytab_cart', JSON.stringify(this.items));
   }
 
   // Add item to cart

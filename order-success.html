@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sipariş Onayı - CofyCare</title>
-    <meta name="description" content="Siparişiniz başarıyla alındı. CofyCare ekibi en kısa sürede size ulaşacak.">
+    <title>Sipariş Onayı - CoffyTab</title>
+    <meta name="description" content="Siparişiniz başarıyla alındı. CoffyTab ekibi en kısa sürede size ulaşacak.">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -227,7 +227,7 @@
     <script>
         // Load order details from localStorage
         document.addEventListener('DOMContentLoaded', () => {
-            const orderData = JSON.parse(localStorage.getItem('cofycare_current_order'));
+            const orderData = JSON.parse(localStorage.getItem('coffytab_current_order'));
             
             if (!orderData) {
                 window.location.href = '/';
@@ -258,7 +258,7 @@
             `;
 
             // Clear cart after successful order
-            localStorage.removeItem('cofycare_cart');
+            localStorage.removeItem('coffytab_cart');
         });
     </script>
 </body>

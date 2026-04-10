@@ -222,12 +222,12 @@ class Checkout {
 
   // Save order
   saveOrder(orderData) {
-    const orders = JSON.parse(localStorage.getItem('cofycare_orders') || '[]');
+    const orders = JSON.parse(localStorage.getItem('coffytab_orders') || '[]');
     orders.push(orderData);
-    localStorage.setItem('cofycare_orders', JSON.stringify(orders));
+    localStorage.setItem('coffytab_orders', JSON.stringify(orders));
     
     // Also save current order for success page
-    localStorage.setItem('cofycare_current_order', JSON.stringify(orderData));
+    localStorage.setItem('coffytab_current_order', JSON.stringify(orderData));
   }
 
   // Send notifications
@@ -246,7 +246,7 @@ class Checkout {
     
     // Template for email
     const emailContent = {
-      to: 'siparis@cofycare.com',
+      to: 'siparis@coffytab.com',
       subject: `Yeni Sipariş - ${orderData.orderId}`,
       body: `
         Sipariş No: ${orderData.orderId}
