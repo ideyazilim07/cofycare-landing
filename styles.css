@@ -1217,9 +1217,56 @@ input, textarea {
 }
 
 @media (max-width: 768px) {
-    .comparison-table th,
+    .comparison-table-wrapper {
+        overflow-x: hidden;
+        margin: 0 -16px;
+        border-radius: 0;
+        box-shadow: none;
+    }
+    
+    .comparison-table {
+        min-width: auto;
+        display: block;
+    }
+    
+    .comparison-table thead {
+        display: none;
+    }
+    
+    .comparison-table tbody,
+    .comparison-table tr {
+        display: block;
+    }
+    
+    .comparison-table tr {
+        margin-bottom: 12px;
+        background: var(--color-white);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        padding: 16px;
+    }
+    
     .comparison-table td {
-        padding: var(--space-md);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--color-border-light);
+        font-size: 0.875rem;
+    }
+    
+    .comparison-table td:last-child {
+        border-bottom: none;
+    }
+    
+    .comparison-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--color-text-primary);
+    }
+    
+    .comparison-table .coffytab-col {
+        background: transparent;
     }
 }
 
