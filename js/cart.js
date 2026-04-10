@@ -102,6 +102,10 @@ class Cart {
 
   // Initialize cart drawer
   initCartDrawer() {
+    // Checkout sayfasında cart drawer oluşturma
+    if (window.location.pathname.includes('checkout')) {
+      return;
+    }
     // Create cart drawer HTML if not exists
     if (!document.getElementById('cart-drawer')) {
       this.createCartDrawer();
@@ -228,7 +232,10 @@ class Cart {
     const drawer = document.getElementById('cart-drawer');
     if (drawer) {
       drawer.classList.add('open');
-      document.body.style.overflow = 'hidden';
+      // Checkout sayfasında body scroll kilitleme
+      if (!window.location.pathname.includes('checkout')) {
+        document.body.style.overflow = 'hidden';
+      }
     }
   }
 
