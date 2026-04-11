@@ -83,7 +83,7 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px; /* Header yüksekliği için offset */
+    scroll-padding-top: 150px; /* Header yüksekliği için offset */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
