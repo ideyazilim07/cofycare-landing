@@ -68,12 +68,12 @@ class PayTRPayment {
 
   /**
    * Backend API'den PayTR token al
-   * Not: Hash oluşturma sunucu tarafında yapılmalıdır
+   * Netlify Functions kullanıyor
    */
   async getPayTRToken(paymentData) {
     try {
-      // Backend API endpoint
-      const response = await fetch(`${this.apiUrl}/api/paytr/token`, {
+      // Netlify Functions endpoint
+      const response = await fetch(`${this.apiUrl}/.netlify/functions/paytr-token`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

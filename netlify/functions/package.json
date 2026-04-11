@@ -1,0 +1,8 @@
+{
+  "name": "cofycare-paytr-api",
+  "version": "1.0.0",
+  "description": "PayTR API for CofyCare",
+  "dependencies": {
+    "axios": "^1.6.0"
+  }
+}

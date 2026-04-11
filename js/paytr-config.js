@@ -21,9 +21,8 @@ const PayTRConfig = {
 };
 
 // Backend API URL (PayTR token oluşturma için)
-// Not: PayTR iframe entegrasyonu için backend API gereklidir
-// Çünkü hash oluşturma sunucu tarafında yapılmalıdır
-const API_BASE_URL = 'https://api.cofycare.com'; // Backend API URL'niz
+// Netlify Functions kullanıyorsuz - otomatik olarak /.netlify/functions/paytr-token
+const API_BASE_URL = window.location.origin;
 
 // Export
 window.PayTRConfig = PayTRConfig;

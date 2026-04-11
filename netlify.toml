@@ -1,0 +1,10 @@
+[build]
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[redirects]]
+  from = "/api/paytr/token"
+  to = "/.netlify/functions/paytr-token"
+  status = 200
