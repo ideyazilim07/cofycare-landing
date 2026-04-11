@@ -17,7 +17,7 @@ const PayTRConfig = {
   failUrl: 'https://cofycare.com/order-failed.html',
   
   // Test modu (gerçek ödeme almadan test için true yapın)
-  testMode: true
+  testMode: false
 };
 
 // Backend API URL (PayTR token oluşturma için)
