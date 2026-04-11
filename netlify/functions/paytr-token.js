@@ -30,6 +30,22 @@ exports.handler = async (event, context) => {
   }
 
   try {
+    // Environment variables kontrolü
+    if (!MERCHANT_ID || !MERCHANT_KEY || !MERCHANT_SALT) {
+      console.error('Missing environment variables:', {
+        hasMerchantId: !!MERCHANT_ID,
+        hasMerchantKey: !!MERCHANT_KEY,
+        hasMerchantSalt: !!MERCHANT_SALT
+      });
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({
+          status: 'error',
+          message: 'Merchant configuration missing'
+        })
+      };
+    }
     const body = JSON.parse(event.body);
     const {
       merchant_oid,
