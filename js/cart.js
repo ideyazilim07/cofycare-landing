@@ -295,7 +295,35 @@ function scrollToPackages() {
 
 // Helper function to add to cart from package cards
 function addPackageToCart(packageType) {
-  cart.addItem(packageType, 1);
+  if (typeof cart !== 'undefined' && cart) {
+    cart.addItem(packageType, 1);
+  } else {
+    console.error('Cart not initialized');
+    // Sepeti manuel olarak oluştur ve ekle
+    const packages = {
+      1: { id: 'pkg-1', name: '1 Adet CoffyTab', price: 690, originalPrice: 690, savings: 0 },
+      2: { id: 'pkg-2', name: '2 Adet CoffyTab', price: 1190, originalPrice: 1380, savings: 190 },
+      3: { id: 'pkg-3', name: '3 Adet CoffyTab', price: 1690, originalPrice: 2070, savings: 380 }
+    };
+    
+    const pkg = packages[packageType];
+    if (!pkg) return;
+    
+    // localStorage'a direkt ekle
+    let items = JSON.parse(localStorage.getItem('coffytab_cart') || '[]');
+    const existingItem = items.find(item => item.id === pkg.id);
+    
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } else {
+      items.push({ ...pkg, quantity: 1 });
+    }
+    
+    localStorage.setItem('coffytab_cart', JSON.stringify(items));
+    
+    // Sayfayı checkout'a yönlendir
+    window.location.href = 'checkout.html';
+  }
 }
 
 // Export for use in other modules
