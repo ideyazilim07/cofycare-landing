@@ -67,13 +67,15 @@ exports.handler = async (event, context) => {
     const user_basket_str = JSON.stringify(user_basket || []);
     const user_basket_base64 = Buffer.from(user_basket_str).toString('base64');
 
-    // PayTR hash oluştur (doğru formül)
+    // PayTR hash oluştur (resmi formül)
     // hash_str = merchant_id + user_ip + merchant_oid + email + payment_amount + user_basket + no_installment + max_installment + currency + test_mode
     const no_installment = '0';
     const max_installment = '12';
     const currency = 'TL';
     
-    const hash_str = `${MERCHANT_ID}${user_ip}${merchant_oid}${email}${payment_amount}${user_basket_base64}${no_installment}${max_installment}${currency}${test_mode}`;
+    const hash_str = MERCHANT_ID + user_ip + merchant_oid + email + payment_amount + user_basket_base64 + no_installment + max_installment + currency + test_mode;
+    
+    // HMAC SHA256 ile hash oluştur
     const paytr_token = crypto.createHmac('sha256', MERCHANT_KEY)
       .update(hash_str + MERCHANT_SALT)
       .digest('base64');
@@ -85,6 +87,7 @@ exports.handler = async (event, context) => {
       merchant_oid,
       email,
       payment_amount,
+      currency: 'TL',
       paytr_token,
       user_basket: user_basket_base64,
       debug_on: test_mode === '1' ? '1' : '0',
