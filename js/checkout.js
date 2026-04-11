@@ -205,6 +205,11 @@ class Checkout {
     // Save order to localStorage (in production, this would go to a database)
     this.saveOrder(orderData);
 
+    // Update stock
+    this.cart.items.forEach(item => {
+      this.cart.updateStock(item.id, item.quantity);
+    });
+
     // Send notifications
     this.sendNotifications(orderData);
 
@@ -239,46 +244,46 @@ class Checkout {
   }
 
   // Email notification
-  sendEmailNotification(orderData) {
-    // In production, integrate with EmailJS or backend API
-    console.log('Email notification sent for order:', orderData.orderId);
-    
-    // Template for email
-    const emailContent = {
-      to: 'siparis@coffytab.com',
-      subject: `Yeni Sipariş - ${orderData.orderId}`,
-      body: `
-        Sipariş No: ${orderData.orderId}
-        Müşteri: ${orderData.name} ${orderData.surname}
-        Email: ${orderData.email}
-        Telefon: ${orderData.phone}
-        Adres: ${orderData.address}, ${orderData.district}/${orderData.city}
-        Toplam: ₺${orderData.totals.total}
-      `
-    };
-    
-    // Store for admin panel
-    localStorage.setItem(`notification_email_${orderData.orderId}`, JSON.stringify(emailContent));
+  async sendEmailNotification(orderData) {
+    try {
+      // Müşteriye sipariş onay e-postası gönder
+      await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderData: orderData,
+          type: 'customer'
+        })
+      });
+
+      // Admin'e yeni sipariş bildirimi gönder
+      await fetch('/.netlify/functions/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          orderData: orderData,
+          type: 'admin'
+        })
+      });
+
+      console.log('Email notifications sent for order:', orderData.orderId);
+    } catch (error) {
+      console.error('Email notification error:', error);
+    }
   }
 
   // WhatsApp notification
-  sendWhatsAppNotification(orderData) {
-    const message = `🛒 *Yeni Sipariş!*
-
-*Sipariş No:* ${orderData.orderId}
-*Müşteri:* ${orderData.name} ${orderData.surname}
-*Telefon:* ${orderData.phone}
-*Toplam:* ₺${orderData.totals.total.toLocaleString('tr-TR')}
-
-*Ürünler:*
-${orderData.items.map(item => `• ${item.name} x${item.quantity} = ₺${(item.price * item.quantity).toLocaleString('tr-TR')}`).join('\n')}
-
-📍 ${orderData.district}/${orderData.city}`;
-
-    // Store for admin to send
-    localStorage.setItem(`notification_whatsapp_${orderData.orderId}`, message);
-    
-    console.log('WhatsApp notification prepared for order:', orderData.orderId);
+  async sendWhatsAppNotification(orderData) {
+    try {
+      await fetch('/.netlify/functions/send-whatsapp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderData })
+      });
+      console.log('WhatsApp notification sent for order:', orderData.orderId);
+    } catch (error) {
+      console.error('WhatsApp notification error:', error);
+    }
   }
 
   // Redirect to payment

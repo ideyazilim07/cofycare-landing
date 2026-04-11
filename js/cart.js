@@ -6,8 +6,48 @@
 class Cart {
   constructor() {
     this.items = [];
+    this.stock = this.loadStock();
     this.loadFromStorage();
     this.initCartDrawer();
+  }
+
+  // Load stock from localStorage
+  loadStock() {
+    const savedStock = localStorage.getItem('coffytab_stock');
+    if (savedStock) {
+      return JSON.parse(savedStock);
+    }
+    // Default stock
+    return {
+      'pkg-1': 100,
+      'pkg-2': 100,
+      'pkg-3': 100
+    };
+  }
+
+  // Save stock to localStorage
+  saveStock() {
+    localStorage.setItem('coffytab_stock', JSON.stringify(this.stock));
+  }
+
+  // Check stock availability
+  checkStock(packageId, requestedQuantity) {
+    const available = this.stock[packageId] || 0;
+    return {
+      available: available,
+      canAdd: available >= requestedQuantity,
+      message: available <= 0 ? 'Ürün stokta yok' : 
+               available < requestedQuantity ? `Sadece ${available} adet stokta var` : null
+    };
+  }
+
+  // Update stock after order
+  updateStock(packageId, quantity) {
+    if (this.stock[packageId] !== undefined) {
+      this.stock[packageId] -= quantity;
+      if (this.stock[packageId] < 0) this.stock[packageId] = 0;
+      this.saveStock();
+    }
   }
 
   // Load cart from localStorage
@@ -34,8 +74,16 @@ class Cart {
     const pkg = packages[packageType];
     if (!pkg) return;
 
+    // Stok kontrolü
     const existingItem = this.items.find(item => item.id === pkg.id);
-    
+    const currentQuantity = existingItem ? existingItem.quantity : 0;
+    const stockCheck = this.checkStock(pkg.id, currentQuantity + quantity);
+
+    if (!stockCheck.canAdd) {
+      this.showToast(stockCheck.message || 'Stok yetersiz', 'error');
+      return;
+    }
+
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
