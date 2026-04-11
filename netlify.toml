@@ -1,4 +1,5 @@
 [build]
+  command = "npm install"
   publish = "."
   functions = "netlify/functions"
 
@@ -8,9 +9,4 @@
 [[redirects]]
   from = "/api/paytr/token"
   to = "/.netlify/functions/paytr-token"
-  status = 200
-
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
   status = 200
