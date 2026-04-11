@@ -75,7 +75,8 @@ exports.handler = async (event, context) => {
     
     const hash_str = MERCHANT_ID + user_ip + merchant_oid + email + payment_amount + user_basket_base64 + no_installment + max_installment + currency + test_mode;
     
-    // HMAC SHA256 ile hash oluştur
+    // HMAC SHA256 ile hash oluştur (PayTR resmi formülü)
+    // base64_encode(hash_hmac('sha256', $hash_str.$merchant_salt, $merchant_key, true))
     const paytr_token = crypto.createHmac('sha256', MERCHANT_KEY)
       .update(hash_str + MERCHANT_SALT)
       .digest('base64');
