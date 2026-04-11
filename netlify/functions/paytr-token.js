@@ -63,22 +63,38 @@ exports.handler = async (event, context) => {
     // IP adresini al
     const user_ip = event.headers['x-forwarded-for'] || event.headers['client-ip'] || '0.0.0.0';
 
-    // Sepet bilgisini JSON string'e çevir ve Base64 encode et
-    const user_basket_str = JSON.stringify(user_basket || []);
+    // Sepet bilgisini PayTR formatına çevir (array of arrays)
+    // Format: [["Ürün Adı", "Fiyat", Adet], ["Ürün Adı 2", "Fiyat 2", Adet 2]]
+    let basketArray = [];
+    if (user_basket && Array.isArray(user_basket)) {
+      basketArray = user_basket.map(item => [
+        item.name || 'Ürün',
+        (item.price || 0).toFixed(2),
+        item.quantity || 1
+      ]);
+    }
+    
+    // Sepeti JSON string'e çevir ve Base64 encode et
+    const user_basket_str = JSON.stringify(basketArray);
     const user_basket_base64 = Buffer.from(user_basket_str).toString('base64');
 
-    // PayTR hash oluştur (resmi formül)
+    // PayTR hash oluştur (resmi Node.js formülü)
     // hash_str = merchant_id + user_ip + merchant_oid + email + payment_amount + user_basket + no_installment + max_installment + currency + test_mode
     const no_installment = '0';
     const max_installment = '12';
     const currency = 'TL';
     
-    const hash_str = MERCHANT_ID + user_ip + merchant_oid + email + payment_amount + user_basket_base64 + no_installment + max_installment + currency + test_mode;
+    // payment_amount'u integer'a çevir (kuruş cinsinden)
+    const payment_amount_int = parseInt(payment_amount, 10) || 0;
+    
+    const hash_str = MERCHANT_ID + user_ip + merchant_oid + email + payment_amount_int + user_basket_base64 + no_installment + max_installment + currency + test_mode;
     
     // HMAC SHA256 ile hash oluştur (PayTR resmi formülü)
-    // base64_encode(hash_hmac('sha256', $hash_str.$merchant_salt, $merchant_key, true))
+    // var paytr_token = hashSTR + merchant_salt;
+    // var token = crypto.createHmac('sha256', merchant_key).update(paytr_token).digest('base64');
+    const paytr_token_str = hash_str + MERCHANT_SALT;
     const paytr_token = crypto.createHmac('sha256', MERCHANT_KEY)
-      .update(hash_str + MERCHANT_SALT)
+      .update(paytr_token_str)
       .digest('base64');
 
     // PayTR API'ye istek gönder
