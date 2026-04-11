@@ -283,14 +283,9 @@ ${orderData.items.map(item => `• ${item.name} x${item.quantity} = ₺${(item.p
 
   // Redirect to payment
   redirectToPayment(orderData) {
-    // For now, redirect to success page
-    // In production, this would integrate with PayTR
-    
-    // Store order for PayTR integration
-    localStorage.setItem('paytr_order_data', JSON.stringify(orderData));
-    
-    // Redirect to success page (simulating payment)
-    window.location.href = 'order-success.html';
+    // PayTR iframe entegrasyonu
+    const paytr = new PayTRPayment();
+    paytr.initiatePayment(orderData);
   }
 }
 

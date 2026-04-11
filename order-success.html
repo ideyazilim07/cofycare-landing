@@ -230,10 +230,27 @@
             const orderData = JSON.parse(localStorage.getItem('coffytab_current_order'));
             
             if (!orderData) {
+                // PayTR callback ile gelen ödeme durumunu kontrol et
+                const urlParams = new URLSearchParams(window.location.search);
+                const paymentStatus = urlParams.get('status');
+                
+                if (paymentStatus === 'success') {
+                    // PayTR başarılı ödeme
+                    const paytrOrder = JSON.parse(localStorage.getItem('paytr_order_data'));
+                    if (paytrOrder) {
+                        displayOrderDetails(paytrOrder);
+                        return;
+                    }
+                }
+                
                 window.location.href = '/';
                 return;
             }
 
+            displayOrderDetails(orderData);
+        });
+        
+        function displayOrderDetails(orderData) {
             // Display order ID
             document.getElementById('order-id').textContent = orderData.orderId;
 
@@ -259,7 +276,7 @@
 
             // Clear cart after successful order
             localStorage.removeItem('coffytab_cart');
-        });
+        }
     </script>
 </body>
 </html>
