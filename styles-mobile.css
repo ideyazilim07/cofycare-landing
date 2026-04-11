@@ -45,12 +45,16 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    text-align: center;
 }
 
 .mobile-product-image img {
     width: 80%;
+    max-width: 300px;
     height: auto;
     object-fit: contain;
+    margin: 0 auto;
+    display: block;
 }
 
 .image-dots {
