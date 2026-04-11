@@ -1,4 +1,5 @@
 [build]
+  publish = "."
   functions = "netlify/functions"
 
 [build.environment]
@@ -7,4 +8,9 @@
 [[redirects]]
   from = "/api/paytr/token"
   to = "/.netlify/functions/paytr-token"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
